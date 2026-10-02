@@ -1,0 +1,26 @@
+Session 8 Concept Answers
+
+Question 1
+The email attribute should be private so outside code cannot change it directly. User should provide a changeEmail method that validates the email format and checks uniqueness before updating the value.
+
+Direct access could place the object in an invalid state by allowing a blank, malformed, or duplicate email. Controlled access keeps validation inside User and ensures every successful change preserves the object's rules.
+
+Question 2
+Inheritance is suitable when every report is genuinely a specialized form of one common report and shares its core behavior. DataExport and DataVisualization should be separate interfaces because they are optional capabilities that different report types may support independently.
+
+Making every capability part of one inheritance hierarchy would force reports to depend on unnecessary behavior. ReportingService can use the common report abstraction and handle optional interfaces when export or visualization is requested, making future report types easier to add.
+
+Question 3
+NotificationService should depend on a Notification interface with a send method. EmailNotification, SMSNotification, PushNotification, and future notification classes implement that interface with their own sending behavior.
+
+The service calls send through the interface, so runtime polymorphism selects the correct implementation. Adding InAppNotification only requires a new implementation and does not require changes to the existing NotificationService workflow.
+
+Question 4
+Organization and Department should use composition because departments belong to the organization and are dissolved with it. Department and Employee should use aggregation because employees can survive the removal of a department and can be reassigned elsewhere.
+
+The key difference is lifecycle ownership. Composition means the part depends on the whole for its lifetime, while aggregation represents a weaker relationship in which the part has an independent existence.
+
+Question 5
+The relationship is Student 0..* to Course 0..*, because each student may enroll in many courses and each course may contain many students. An Enrollment association class can store each student-course relationship.
+
+The no-duplicate rule is a business constraint rather than a multiplicity rule. It should be enforced by checking existing enrollments or by using a unique constraint on the pair of studentId and courseId.

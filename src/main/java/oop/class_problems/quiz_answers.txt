@@ -1,0 +1,12 @@
+Session 8 Quiz Answers
+
+1. B - Polymorphism
+2. C - Encapsulation
+3. C - Author 1 to many Books (1..*)
+4. D - Composition
+5. D - Generalization
+6. C - Realization
+7. B - Association
+8. C - State diagram
+9. B - Abstraction
+10. C - Sequence diagram
