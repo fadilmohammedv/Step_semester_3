@@ -1,0 +1,99 @@
+CATEGORY B - ANSWERS
+
+==================================================
+PART B: QUIZ
+==================================================
+
+Q1.  B - # age and + getName()
+     Student can use the protected and public members of Person, but not the private ones.
+
+Q2.  C - Diagram 3
+     Class S is extending both Q and R, and a class can extend only one class in single inheritance.
+
+Q3.  B - Person -> Employee -> Manager
+     The base class constructor always finishes first, then the derived one.
+
+Q4.  C - Derived can directly access protectedField
+     Private is not accessible, a final method can't be overridden, and we can't reduce the access level while overriding.
+
+Q5.  B - The fare() method defined in Bus
+     The method that runs depends on the actual object, which is Bus.
+
+Q6.  B - The two print methods in Printer are overloading, and print(String) in SpecialPrinter is overriding
+     Same name with different parameters is overloading, same signature in the subclass is overriding.
+
+Q7.  A - Only members defined in Shape
+     The reference type is Shape, so we can't access radius without casting it to Circle.
+
+Q8.  C - Circle's area() for shapes[0] and Square's area() for shapes[1]
+     This is runtime polymorphism, the actual object decides which method runs.
+
+Q9.  B - (Savings) a will fail, (Current) a will succeed
+     The object is actually a Current, so casting it to Savings gives a ClassCastException.
+
+Q10. B - It allows uniform processing of different derived objects through a base-type reference
+     No need for if-else to check the type of each plan.
+
+Q11. A - printDocument() is the essential behavior, the rest are hidden details
+     The user only needs to call printDocument(), how the buffer works is internal.
+
+Q12. B - A Vehicle reference can refer to a Car object
+     We can't create an object of an abstract class, but a parent reference can point to a child object.
+
+Q13. B - SavingsAccount must also be declared abstract
+     If a subclass doesn't implement the abstract method, it has to be abstract too.
+
+Q14. B - MonthlyReport being concrete without implementing generateBody()
+     That gives a compile error because the abstract method is not implemented.
+
+Q15. A - It specifies operations a type promises to provide, but not per-object state or direct implementation
+     An interface is just a contract.
+
+Q16. B - logMessage() and getLogLevel() are implicitly public abstract
+     MAX_LOG_SIZE is also implicitly public static final.
+
+Q17. C - Both serialize() and reset()
+     A class has to implement all the methods of every interface it implements.
+
+Q18. C - Box C (Interface)
+     We only want a common protocol with no implementation and no state, which is what an interface is for.
+
+Q19. B - Dog IS-A Animal (generalization), Eagle CAN-DO Flyable (realization)
+     Extending a class is IS-A, implementing an interface is CAN-DO.
+
+Q20. A - equals(), hashCode(), toString()
+     Every class gets these from the Object class and we usually override them.
+
+==================================================
+PART C: CONCEPT QUESTIONS
+==================================================
+
+Question 1
+Method overloading is when we write methods with the same name in a class but with different parameters. The compiler decides which one to call while compiling, so it is compile-time (static) binding. Method overriding is when a child class gives its own version of a method that it got from the parent, with the same name and parameters. Here the method is decided at run time based on the actual object, so it is run-time (dynamic) binding.
+
+Question 2
+When we create an object of a derived class, the base class constructor runs first and then the derived class constructor. For example, in Person -> Employee -> Manager, the order is Person, then Employee, then Manager. If the derived constructor has to pass values to the base constructor, we use super(arguments) as the first line of the derived constructor. If we don't write it, Java automatically calls the default super() constructor.
+
+Question 3
+A concrete class can be instantiated, can have variables (state) and has all methods implemented. An abstract class cannot be instantiated, but it can have state and both normal and abstract methods. An interface cannot be instantiated and has no per-object state, it mostly just has method declarations (and constants). We use a concrete class when the class is complete and ready to use. We use an abstract class when related classes share some common code and state but each has to complete some parts. We use an interface when different classes need to follow the same rules, like Payable or Flyable.
+
+Question 4
+The class only has to write one method with that signature, and that one method satisfies both interfaces. Since the interface methods are abstract, there is nothing to clash with, the class just provides the body once. This shows that an interface only defines what has to be done and not how, and the implementing class decides the actual behavior.
+
+Question 5
+If we want two objects to be equal when their data is the same (content equality), we have to override equals(), because the default one only checks the memory address (identity). We must also override hashCode(), because objects that are equal must give the same hash code. If we only override equals(), then two equal objects can get different hash codes. In a HashSet or HashMap they go into different buckets, so the set will store duplicates and map.get() may not find a key that we already added.
+
+Question 6
+In a shallow copy only the outer object is copied, and the nested objects are shared between the original and the copy (only the references are copied). In a deep copy, the nested objects are also copied, so both are completely separate. For example, if a Student object has a List of subjects and we make a shallow copy, then adding a subject in the copy also changes the original student's list because both point to the same list. So we need a deep copy when the object has mutable nested objects, so that changing one doesn't affect the other.
+
+Question 7
+An inner class is a non-static class inside another class. It needs an object of the outer class to be created (outer.new Inner()) and it can use the outer class's instance members, even private ones. A static nested class is created without an outer object (new Outer.Nested()) and can access only the static members of the outer class directly. A use case for an inner class is an iterator inside a list class, since it needs the data of that particular list. A use case for a static nested class is a Node class inside a LinkedList, or a Builder class, because it doesn't need the outer object.
+
+Question 8
+Accessing an element by index is O(1) because the address is calculated directly from the starting address and the index, so it takes the same time for any element. Insertion or deletion in the middle is O(n), because all the elements after that position have to be shifted by one place, and in the worst case we shift almost all the elements. Also, since the array has a fixed size, we can't really add more elements than its size.
+
+Question 9
+We can make an array of the base type, like Shape[], and store objects of different child classes in it (Circle, Square and so on). Then we can loop through the array and call the same method on each element. Because of dynamic method dispatch, Java checks the actual object at run time and calls that object's own overridden method, so a Circle calculates the area of a circle and a Square calculates the area of a square. We don't need any instanceof checks or if-else, and we can add new child classes without changing the loop.
+
+Question 10
+We use inheritance (IS-A) when the child is really a type of the parent and shares its properties and behavior, like Dog IS-A Animal. We use an interface (CAN-DO) when we only want to say that a class can do some ability, and the classes may not be related to each other. For example, Bird, Airplane and Drone can all implement a Flyable interface even though they have no common parent class. Inheritance wouldn't suit here, and also a class can extend only one class but can implement many interfaces, so interfaces are more flexible.
